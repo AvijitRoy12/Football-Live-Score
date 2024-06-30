@@ -1,12 +1,33 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Image,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ onSearch }) => {
+  const navigate = useNavigate();
+  const profileImage =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDwmG52pVI5JZfn04j9gdtsd8pAGbqjjLswg&s";
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchTerm = e.target.search.value;
+    navigate("/");
+    onSearch(searchTerm);
+  };
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <div className="container-fluid">
-        <Navbar.Brand href="#home">AllSports Live</Navbar.Brand>
+        <Navbar.Brand href="#home">Sport Sphere</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
@@ -46,11 +67,26 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#more">More</Nav.Link>
+            <LinkContainer to="/eurocup">
+              <Nav.Link>EuroCup</Nav.Link>
+            </LinkContainer>
           </Nav>
+          <Form className="d-flex" onSubmit={handleSearch}>
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              name="search"
+            />
+            <Button variant="outline-success" type="submit">
+              Search
+            </Button>
+          </Form>
           <Nav>
             <Nav.Link href="#profile">
               <Image
-                src="path_to_profile_image.jpg"
+                src={profileImage}
                 roundedCircle
                 height="30"
                 width="30"
