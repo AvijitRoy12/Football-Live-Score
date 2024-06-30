@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const MatchList = () => {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     const fetchMatches = async () => {
-      const response = await fetch(
+      const response = await axios.get(
         "https://v3.football.api-sports.io/fixtures?live=all",
         {
           headers: {
-            "x-rapidapi-host": "v3.football.api-sports.io",
-            "x-rapidapi-key": "xxxxxxx",
+            "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+            "x-rapidapi-host": process.env.REACT_APP_API_HOST,
           },
         }
       );
-      const data = await response.json();
-      setMatches(data.response);
+      setMatches(response.data.response);
     };
 
     fetchMatches();
