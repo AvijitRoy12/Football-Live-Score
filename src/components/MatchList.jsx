@@ -10,7 +10,7 @@ const MatchList = () => {
         {
           headers: {
             "x-rapidapi-host": "v3.football.api-sports.io",
-            "x-rapidapi-key": "xxxxxxxx",
+            "x-rapidapi-key": "4b9a5c5ff16ce2810e6c235aec211e17",
           },
         }
       );

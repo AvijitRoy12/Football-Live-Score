@@ -1,12 +1,11 @@
 import "./App.css";
-import MatchList from "./MatchList";
+import MatchList from "./components/MatchList";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Football Live Matches</h1>
-      </header>
+      <NavBar />
       <main>
         <MatchList />
       </main>
