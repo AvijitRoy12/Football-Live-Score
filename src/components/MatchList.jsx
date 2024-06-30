@@ -3,18 +3,16 @@ import axios from "axios";
 
 const MatchList = () => {
   const [matches, setMatches] = useState([]);
+  const fixturesUrl = "https://v3.football.api-sports.io/fixtures?live=all";
 
   useEffect(() => {
     const fetchMatches = async () => {
-      const response = await axios.get(
-        "https://v3.football.api-sports.io/fixtures?live=all",
-        {
-          headers: {
-            "x-rapidapi-key": process.env.REACT_APP_API_KEY,
-            "x-rapidapi-host": process.env.REACT_APP_API_HOST,
-          },
-        }
-      );
+      const response = await axios.get(fixturesUrl, {
+        headers: {
+          "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+          "x-rapidapi-host": process.env.REACT_APP_API_HOST,
+        },
+      });
       setMatches(response.data.response);
     };
 
