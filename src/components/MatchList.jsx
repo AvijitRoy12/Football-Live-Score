@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Row, Col, Collapse, Form } from "react-bootstrap";
+import { Card, Row, Col, Collapse, Form, Image } from "react-bootstrap";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import "../styles/MatchList.css";
 
 const MatchList = ({ searchTerm }) => {
   const [matches, setMatches] = useState([]);
@@ -82,22 +83,25 @@ const MatchList = ({ searchTerm }) => {
       <Row>
         {filteredMatches.map((match) => (
           <Col key={match.fixture.id} md={6} lg={4} className="mb-4">
-            <Card className="shadow-sm">
+            <Card className="shadow-sm match-card">
               <Card.Body>
-                <Card.Title>
-                  {match.teams.home.name} vs {match.teams.away.name}
-                </Card.Title>
-                <Card.Text>
+                <Card.Title className="d-flex justify-content-between align-items-center">
+                  <span>
+                    {match.teams.home.name} vs {match.teams.away.name}
+                  </span>
                   <img
                     src={match.league.logo}
                     alt={match.league.name}
-                    width="20"
-                    height="20"
-                  />{" "}
+                    width="30"
+                    height="30"
+                  />
+                </Card.Title>
+                <Card.Text className="text-muted">
                   {match.league.name} - {match.league.country}
                 </Card.Text>
-                <Card.Text>
-                  Score: {match.goals.home} - {match.goals.away}
+                <Card.Text className="score">
+                  <strong>{match.goals.home}</strong> -{" "}
+                  <strong>{match.goals.away}</strong>
                 </Card.Text>
                 <div
                   className="expand-icon"

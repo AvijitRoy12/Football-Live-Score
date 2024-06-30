@@ -1,0 +1,27 @@
+.match-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.match-card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.card-text.score {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+.expand-icon {
+  margin-top: 10px;
+}
+
+.text-muted {
+  font-size: 0.9em;
+}
