@@ -27,7 +27,7 @@ const NavBar = ({ onSearch }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <div className="container-fluid">
-        <Navbar.Brand href="#home">Sports Sphere</Navbar.Brand>
+        <Navbar.Brand href="#home">RoySportsArena</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"

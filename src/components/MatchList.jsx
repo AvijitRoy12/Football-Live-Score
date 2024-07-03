@@ -12,6 +12,9 @@ const MatchList = ({ searchTerm }) => {
   const [selectedLeague, setSelectedLeague] = useState("");
   const fixturesUrl = "https://v3.football.api-sports.io/fixtures?live=all";
 
+  /**
+   * Fetch matches data from the API and set the state
+   */
   useEffect(() => {
     const fetchMatches = async () => {
       const response = await axios.get(fixturesUrl, {
@@ -36,6 +39,9 @@ const MatchList = ({ searchTerm }) => {
     fetchMatches();
   }, []);
 
+  /**
+   * Filter matches based on search term and selected league
+   */
   useEffect(() => {
     let filtered = matches;
 
@@ -58,6 +64,10 @@ const MatchList = ({ searchTerm }) => {
     setFilteredMatches(filtered);
   }, [searchTerm, selectedLeague, matches]);
 
+  /**
+   * Toggle match details expand/collapse
+   * @param {*} matchId 
+   */
   const toggleExpand = (matchId) => {
     setExpandedMatchId(expandedMatchId === matchId ? null : matchId);
   };
