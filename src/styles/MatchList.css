@@ -1,27 +1,116 @@
-.match-card {
+.match-list {
+  padding: 20px;
   border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.match-card:hover {
-  transform: scale(1.05);
+.match-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #2c2c2c;
+  border-radius: 5px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.card-title {
+.match-item:hover {
+  transform: translateY(-5px); /* Slightly lift the card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #b8b8b8;
+}
+
+.league-name {
+  display: flex;
+  align-items: center;
+}
+
+.league-name img {
+  margin-right: 10px;
+}
+
+.match-status {
+  text-align: center;
+  flex: 1;
+  color: #00d1b2;
+  text-align: left;
+}
+
+.match-time {
+  color: #ffa500;
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #b8b8b8;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-info img {
+  margin-right: 10px;
+}
+
+.team-name {
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.2em;
 }
 
-.card-text.score {
-  font-size: 1.5em;
+.score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00d1b2;
+}
+
+.match-details {
+  color: #b8b8b8;
   margin-top: 10px;
 }
 
-.expand-icon {
-  margin-top: 10px;
+.league-text {
+  font-size: 0.9rem;
+  color: #ffa500;
+}
+.league-select {
+  font-size: 0.9rem;
+  color: #ffa500;
+  background-color: #2c2c2c;
 }
 
-.text-muted {
-  font-size: 0.9em;
+.venue {
+  font-size: 0.9rem;
+  color: #ffa500;
+  text-align: right;
+}
+
+/* Sidebar */
+.sidebar {
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* News section */
+.news-container {
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
 }

@@ -1,0 +1,18 @@
+.news-list {
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.news-item {
+  margin-bottom: 10px;
+}
+
+.news-card {
+  background-color: #2c2c2c;
+  color: #b8b8b8;
+}
+
+.news-author {
+  color: #ffa500;
+}

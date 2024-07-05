@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Row, Col, Collapse, Form, Image } from "react-bootstrap";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { Row, Col, Form, Image } from "react-bootstrap";
 import "../styles/MatchList.css";
 
 const MatchList = ({ searchTerm }) => {
   const [matches, setMatches] = useState([]);
-  const [expandedMatchId, setExpandedMatchId] = useState(null);
   const [filteredMatches, setFilteredMatches] = useState([]);
   const [leagues, setLeagues] = useState([]);
   const [selectedLeague, setSelectedLeague] = useState("");
   const fixturesUrl = "https://v3.football.api-sports.io/fixtures?live=all";
 
-  /**
-   * Fetch matches data from the API and set the state
-   */
   useEffect(() => {
     const fetchMatches = async () => {
       const response = await axios.get(fixturesUrl, {
@@ -39,9 +34,6 @@ const MatchList = ({ searchTerm }) => {
     fetchMatches();
   }, []);
 
-  /**
-   * Filter matches based on search term and selected league
-   */
   useEffect(() => {
     let filtered = matches;
 
@@ -64,20 +56,12 @@ const MatchList = ({ searchTerm }) => {
     setFilteredMatches(filtered);
   }, [searchTerm, selectedLeague, matches]);
 
-  /**
-   * Toggle match details expand/collapse
-   * @param {*} matchId 
-   */
-  const toggleExpand = (matchId) => {
-    setExpandedMatchId(expandedMatchId === matchId ? null : matchId);
-  };
-
   return (
     <>
-      <h2 className="text-center my-4">Score Board</h2>
       <Form.Group controlId="leagueSelect" className="mb-4">
-        <Form.Label>Select League</Form.Label>
+        <Form.Label className="league-text">Select League</Form.Label>
         <Form.Control
+        className="league-select"
           as="select"
           value={selectedLeague}
           onChange={(e) => setSelectedLeague(e.target.value)}
@@ -90,63 +74,57 @@ const MatchList = ({ searchTerm }) => {
           ))}
         </Form.Control>
       </Form.Group>
-      <Row>
+      <div className="match-list">
         {filteredMatches.map((match) => (
-          <Col key={match.fixture.id} md={6} lg={4} className="mb-4">
-            <Card className="shadow-sm match-card">
-              <Card.Body>
-                <Card.Title className="d-flex justify-content-between align-items-center">
-                  <span>
-                    {match.teams.home.name} vs {match.teams.away.name}
-                  </span>
-                  <img
-                    src={match.league.logo}
-                    alt={match.league.name}
-                    width="30"
-                    height="30"
-                  />
-                </Card.Title>
-                <Card.Text className="text-muted">
+          <div key={match.fixture.id} className="match-item">
+            <div className="header-row">
+              <div className="league-name">
+                <Image
+                  src={match.league.logo}
+                  alt={match.league.name}
+                  width="30"
+                />
+                <span>
                   {match.league.name} - {match.league.country}
-                </Card.Text>
-                <Card.Text className="score">
-                  <strong>{match.goals.home}</strong> -{" "}
-                  <strong>{match.goals.away}</strong>
-                </Card.Text>
-                <div
-                  className="expand-icon"
-                  onClick={() => toggleExpand(match.fixture.id)}
-                  aria-controls={`match-collapse-${match.fixture.id}`}
-                  aria-expanded={expandedMatchId === match.fixture.id}
-                  style={{
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  {expandedMatchId === match.fixture.id ? (
-                    <FiChevronUp />
-                  ) : (
-                    <FiChevronDown />
-                  )}
-                </div>
-                <Collapse in={expandedMatchId === match.fixture.id}>
-                  <div id={`match-collapse-${match.fixture.id}`}>
-                    <Card.Text>
-                      Date: {new Date(match.fixture.date).toLocaleString()}
-                    </Card.Text>
-                    <Card.Text>
-                      Venue: {match.fixture.venue.name},{" "}
-                      {match.fixture.venue.city}
-                    </Card.Text>
-                    <Card.Text>Status: {match.fixture.status.long}</Card.Text>
-                  </div>
-                </Collapse>
-              </Card.Body>
-            </Card>
-          </Col>
+                </span>
+              </div>
+              <div className="match-time">
+                {new Date(match.fixture.date).toLocaleString()}
+              </div>
+            </div>
+            <Row className="align-items-center match-header">
+              <Col xs={5} className="team-info text-right">
+                <Image
+                  src={match.teams.home.logo}
+                  alt={match.teams.home.name}
+                  width="30"
+                />
+                <span className="team-name">{match.teams.home.name}</span>
+              </Col>
+              <Col xs={2} className="score text-center">
+                <strong>{match.goals.home}</strong> -{" "}
+                <strong>{match.goals.away}</strong>
+              </Col>
+              <Col xs={5} className="team-info">
+                <Image
+                  src={match.teams.away.logo}
+                  alt={match.teams.away.name}
+                  width="30"
+                />
+                <span className="team-name">{match.teams.away.name}</span>
+              </Col>
+            </Row>
+            <Row className="match-details text-center">
+              <div className="match-status">
+                Status: {match.fixture.status.long}
+              </div>
+              <Col className="venue">
+                {match.fixture.venue.name}, {match.fixture.venue.city}
+              </Col>
+            </Row>
+          </div>
         ))}
-      </Row>
+      </div>
     </>
   );
 };
